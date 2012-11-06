@@ -56,10 +56,15 @@ ExpvarRegistry::Lookup(QString key)
 }
 }  // namespace _private
 
+ExpVarBase::~ExpVarBase()
+{
+}
+
 template <typename T>
 ExpVar<T>::ExpVar(QString name, T* ref)
-: name_(name), value_(ref), value_deleter_(ref)
+: name_(name), value_deleter_(new T)
 {
+	value_ = value_deleter_.data();
 	QSingleton<_private::ExpvarRegistry>::GetInstance().Register(
 			name, this);
 }
@@ -67,14 +72,6 @@ ExpVar<T>::ExpVar(QString name, T* ref)
 template <typename T>
 ExpVar<T>::~ExpVar()
 {
-}
-
-template <typename T> T
-ExpVar<T>::operator+(const T& increment)
-{
-	ExpVar<T> newval(*value_);
-	newval.Add(increment);
-	return newval;
 }
 
 template <typename T> T&
@@ -91,10 +88,16 @@ ExpVar<T>::Add(const T& increment)
 }
 
 template <typename T> void
-ExpVar<T>::Set(const T* newval)
+ExpVar<T>::Set(T* newval)
 {
 	value_ = newval;
 	value_deleter_.reset(newval);
+}
+
+template <typename T> void
+ExpVar<T>::SetValue(T newval)
+{
+	*value_ = newval;
 }
 
 template <typename T> QString
@@ -109,10 +112,30 @@ ExpVar<T>::String()
 	return QString();
 }
 
+template <>
+ExpVar<int64_t>::ExpVar(QString name, int64_t* ref)
+: name_(name), value_(ref), value_deleter_(ref)
+{
+}
+
+template <>
+ExpVar<int64_t>::ExpVar(QString name)
+: name_(name), value_deleter_(new int64_t)
+{
+	value_ = value_deleter_.data();
+	*value_ = 0;
+}
+
 template <> void
 ExpVar<int64_t>::Add(const int64_t& increment)
 {
 	*value_ += increment;
+}
+
+template <> int64_t
+ExpVar<int64_t>::Get()
+{
+	return *value_;
 }
 
 template <> QString
@@ -121,6 +144,37 @@ ExpVar<int64_t>::String()
 	QString ret;
 	ret.setNum(*value_, 10);
 	return ret;
+}
+
+template <>
+ExpVar<QString>::ExpVar(QString name, QString* ref)
+: name_(name), value_(ref), value_deleter_(ref)
+{
+}
+
+template <>
+ExpVar<QString>::ExpVar(QString name)
+: name_(name), value_deleter_(new QString)
+{
+	value_ = value_deleter_.data();
+}
+
+template <> void
+ExpVar<QString>::Add(const QString& increment)
+{
+	*value_ += increment;
+}
+
+template <> QString
+ExpVar<QString>::Get()
+{
+	return *value_;
+}
+
+template <> QString
+ExpVar<QString>::String()
+{
+	return *value_;
 }
 
 }  // namespace toolbox
