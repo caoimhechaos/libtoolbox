@@ -67,14 +67,15 @@ template <typename T>
 class ExpVar : public ExpVarBase
 {
 public:
+	ExpVar(QString name);
 	ExpVar(QString name, T* ref);
 	virtual ~ExpVar();
 
-	virtual T operator+(const T& increment);
 	virtual T& operator+=(const T& increment);
 
 	virtual void Add(const T& increment);
-	virtual void Set(const T* newval);
+	virtual void Set(T* newval);
+	virtual void SetValue(T newval);
 	virtual T Get();
 	virtual QString Name();
 	virtual QString String();
