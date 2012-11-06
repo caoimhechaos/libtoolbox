@@ -36,17 +36,26 @@ CXXFLAGS="${CXXFLAGS}"
 AC_SUBST(CXXFLAGS)
 
 # Checks for libraries.
+GTEST_LIBS=""
 QT_LIBS=""
+AC_CHECK_LIB([gtest], [main],
+	     [GTEST_LIBS="$GTEST_LIBS -lgtest"])
+AC_CHECK_LIB([gtest_main], [main],
+	     [GTEST_LIBS="$GTEST_LIBS -lgtest_main"])
 AC_CHECK_LIB([QtCore], [main],
 	     [QT_LIBS="$QT_LIBS -lQtCore"])
 AC_CHECK_LIB([QtNetwork], [main],
 	     [QT_LIBS="$QT_LIBS -lQtNetwork"])
 AC_LIBS="$AC_LIBS $QT_LIBS"
+AC_SUBST(GTEST_LIBS)
 AC_SUBST(QT_LIBS)
 AC_SUBST(AC_LIBS)
 
 # Checks for header files.
+old_CPPFLAGS="$CPPFLAGS"
+CPPFLAGS="$CPPFLAGS $INCLUDES"
 AC_CHECK_HEADERS([QtCore/QMap QtCore/QString])
+CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.
 
