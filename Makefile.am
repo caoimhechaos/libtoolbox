@@ -5,6 +5,7 @@ lib_LTLIBRARIES=	libtoolbox.la
 
 libtoolbox_la_SOURCES=	expvar.cc
 libtoolbox_la_LDFLAGS=	-version-info ${LIBRARY_VERSION}
+libtoolbox_la_LIBADD=	${QT_LIBS}
 
 includetoolboxdir=	${includedir}/toolbox
 includetoolbox_HEADERS=	expvar.h qsingleton.h
