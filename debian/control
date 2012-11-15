@@ -1,0 +1,21 @@
+Source: libtoolbox
+Priority: extra
+Maintainer: Caoimhe Chaos <caoimhechaos@protonmail.com>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev
+Standards-Version: 3.9.3
+Section: libs
+Homepage: http://toolbox.ancient-solutions.com/
+Vcs-Git: http://git.ancient-solutions.com/base/libtoolbox.git
+Vcs-Browser: http://git.ancient-solutions.com/cgi-bin/gitweb.cgi?p=base/libtoolbox.git;a=summary
+
+Package: libtoolbox-dev
+Section: libdevel
+Architecture: any
+Depends: libtoolbox1 (= ${binary:Version})
+Description: Development header for files linked against the toolbox library.
+
+Package: libtoolbox1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library containing various valuable and practical tools for C++.
