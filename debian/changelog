@@ -1,3 +1,10 @@
+libtoolbox (0.1.1-1) unstable; urgency=low
+
+  * Compute something like a checksum for the data which was actually read.
+    This will of course be made useless by seeks etc.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 20 Nov 2012 20:43:16 +0100
+
 libtoolbox (0.1-1) unstable; urgency=low
 
   * Initial release
