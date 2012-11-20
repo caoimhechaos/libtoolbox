@@ -62,8 +62,12 @@ public:
 	// created.
 	virtual google::protobuf::int64 ByteCount() const;
 
+	// Returns the checksum we collected so far.
+	virtual uint32_t Checksum() const;
+
 protected:
 	QFile* file_;
+	uint32_t crc32_;
 };
 
 }  // namespace io

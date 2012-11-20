@@ -39,6 +39,7 @@ AC_SUBST(CXXFLAGS)
 GTEST_LIBS=""
 QT_LIBS=""
 PROTO_LIBS=""
+Z_LIBS=""
 AC_CHECK_LIB([gtest], [main],
 	     [GTEST_LIBS="$GTEST_LIBS -lgtest"])
 AC_CHECK_LIB([gtest_main], [main],
@@ -49,9 +50,12 @@ AC_CHECK_LIB([QtNetwork], [main],
 	     [QT_LIBS="$QT_LIBS -lQtNetwork"])
 AC_CHECK_LIB([protobuf], [main],
 	     [PROTO_LIBS="$PROTO_LIBS -lprotobuf"])
-AC_LIBS="$AC_LIBS $QT_LIBS"
+AC_CHECK_LIB([z], [crc32],
+	     [Z_LIBS="$Z_LIBS -lz"])
+AC_LIBS="$AC_LIBS $QT_LIBS $Z_LIBS"
 AC_SUBST(GTEST_LIBS)
 AC_SUBST(QT_LIBS)
+AC_SUBST(Z_LIBS)
 AC_SUBST(AC_LIBS)
 AC_SUBST(PROTO_LIBS)
 
