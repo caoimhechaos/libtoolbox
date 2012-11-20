@@ -28,6 +28,7 @@
  */
 
 #include "QFileZeroCopyInputStream.h"
+#include <zlib.h>
 
 #define	QFILEINPUTSTREAM	65536
 
@@ -37,7 +38,7 @@ namespace io
 {
 
 QFileZeroCopyInputStream::QFileZeroCopyInputStream(QFile* filesource)
-: file_(filesource)
+: file_(filesource), crc32_(crc32(0L, Z_NULL, 0))
 {
 	if (!file_->isOpen())
 		file_->open(QIODevice::ReadOnly);
@@ -65,6 +66,8 @@ QFileZeroCopyInputStream::Next(const void** data, int* size)
 	{
 		*data = buf.take();
 		*size = bytes_read;
+		crc32_ = crc32(crc32_, (unsigned char*) buf.data(),
+				bytes_read);
 		return true;
 	}
 }
@@ -91,6 +94,12 @@ google::protobuf::int64
 QFileZeroCopyInputStream::ByteCount() const
 {
 	return file_->pos();
+}
+
+uint32_t
+QFileZeroCopyInputStream::Checksum() const
+{
+	return crc32_;
 }
 
 }  // namespace io
