@@ -57,7 +57,7 @@ QFileZeroCopyInputStream::Next(const void** data, int* size)
 	QScopedPointer<char> buf(new char[QFILEINPUTSTREAM]);
 
 	bytes_read = file_->read(buf.data(), QFILEINPUTSTREAM);
-	if (bytes_read < 0)
+	if (bytes_read <= 0)
 	{
 		*size = 0;
 		return false;
