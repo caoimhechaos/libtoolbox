@@ -1,3 +1,11 @@
+libtoolbox (0.1.2-1) unstable; urgency=low
+
+  * Fix off-by-one error when determining whether or not the end of the
+    input has been reached. This should stop Linux from dropping dead
+    in some cases.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 27 Nov 2012 21:58:45 +0100
+
 libtoolbox (0.1.1-1) unstable; urgency=low
 
   * Compute something like a checksum for the data which was actually read.
