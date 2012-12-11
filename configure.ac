@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libtoolbox], [0.1.2], [caoimhechaos@protonmail.com])
+AC_INIT([libtoolbox], [0.2], [caoimhechaos@protonmail.com])
 AC_CONFIG_SRCDIR([expvar.cc])
 AC_CONFIG_HEADERS([config.h])
 
@@ -23,7 +23,7 @@ AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_LANG(C++)
 
-LIBRARY_VERSION=`echo $VERSION | $SED -e's/\./:/g'`
+LIBRARY_VERSION=`echo $VERSION | $SED -e's/\.//g' -e's/^0*//g'`:0:0
 AC_SUBST(LIBRARY_VERSION)
 
 OLDCXXFLAGS="$CXXFLAGS"
