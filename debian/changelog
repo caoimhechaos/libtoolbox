@@ -1,3 +1,9 @@
+libtoolbox (0.2-1) unstable; urgency=low
+
+  * Add a relatively broken implementation of reference counted objects.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 11 Dec 2012 20:56:06 +0100
+
 libtoolbox (0.1.2-1) unstable; urgency=low
 
   * Fix off-by-one error when determining whether or not the end of the
