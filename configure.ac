@@ -62,7 +62,7 @@ AC_SUBST(PROTO_LIBS)
 # Checks for header files.
 old_CPPFLAGS="$CPPFLAGS"
 CPPFLAGS="$CPPFLAGS $INCLUDES"
-AC_CHECK_HEADERS([QtCore/QMap QtCore/QString])
+AC_CHECK_HEADERS([QtCore/QMap QtCore/QString sys/inotify.h])
 CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.
