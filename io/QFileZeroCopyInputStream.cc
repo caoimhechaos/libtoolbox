@@ -85,9 +85,9 @@ bool
 QFileZeroCopyInputStream::Skip(int count)
 {
 	if (file_->pos() + count > file_->size())
-		file_->seek(file_->size());
+		return file_->seek(file_->size());
 	else
-		file_->seek(file_->pos() + count);
+		return file_->seek(file_->pos() + count);
 }
 
 google::protobuf::int64
