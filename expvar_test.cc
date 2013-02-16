@@ -24,7 +24,7 @@ protected:
 
 TEST_F(ExpVarTest, IntegerVariables)
 {
-	ExpVar<int64_t> exported(QString("test-variable"));
+	ExpVar<int64_t> exported(string("test-variable"));
 	EXPECT_EQ(0, exported.Get());
 	EXPECT_EQ(10, exported += 10);
 	exported.Add(1);
@@ -33,21 +33,21 @@ TEST_F(ExpVarTest, IntegerVariables)
 	EXPECT_EQ(0, exported.Get());
 
 	exported.Add(23);
-	EXPECT_EQ(QString("test-variable"), exported.Name());
-	EXPECT_EQ(QString("23"), exported.String());
+	EXPECT_EQ("test-variable", exported.Name());
+	EXPECT_EQ("23", exported.String());
 }
 
 TEST_F(ExpVarTest, StringVariables)
 {
-	ExpVar<QString> exported(QString("test-variable"),
-			new QString("test-string"));
-	EXPECT_EQ(QString("test-string"), exported.Get());
-	EXPECT_EQ(QString("test-variable"), exported.Name());
-	EXPECT_EQ(QString("test-string"), exported.String());
+	ExpVar<string> exported("test-variable",
+			new string("test-string"));
+	EXPECT_EQ("test-string", exported.Get());
+	EXPECT_EQ("test-variable", exported.Name());
+	EXPECT_EQ("test-string", exported.String());
 
-	exported += QString(" test-value");
-	EXPECT_EQ(QString("test-string test-value"), exported.Get());
-	EXPECT_EQ(QString("test-string test-value"), exported.String());
+	exported += " test-value";
+	EXPECT_EQ("test-string test-value", exported.Get());
+	EXPECT_EQ("test-string test-value", exported.String());
 }
 
 } /* namespace testing */

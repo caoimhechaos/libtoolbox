@@ -32,14 +32,18 @@
 #ifndef TOOLBOX_EXPVAR_H
 #define TOOLBOX_EXPVAR_H 1
 
-#include <QtCore/QString>
-#include <QtCore/QMap>
-#include <QtCore/QScopedPointer>
+#include <string>
+#include <map>
+#include "scopedptr.h"
 
 #include <exception>
 
 namespace toolbox
 {
+using std::map;
+using std::pair;
+using std::string;
+
 class ExpVarBase;
 
 namespace _private
@@ -47,11 +51,11 @@ namespace _private
 class ExpvarRegistry
 {
 public:
-	void Register(QString key, ExpVarBase* var);
-	ExpVarBase* Lookup(QString key);
+	void Register(string key, ExpVarBase* var);
+	ExpVarBase* Lookup(string key);
 
 private:
-	QMap<QString, ExpVarBase*> expvars_;
+	map<string, ExpVarBase*> expvars_;
 };
 }  // namespace _private
 
@@ -59,16 +63,16 @@ class ExpVarBase
 {
 public:
 	virtual ~ExpVarBase() = 0;
-	virtual QString Name() = 0;
-	virtual QString String() = 0;
+	virtual string Name() = 0;
+	virtual string String() = 0;
 };
 
 template <typename T>
 class ExpVar : public ExpVarBase
 {
 public:
-	ExpVar(QString name);
-	ExpVar(QString name, T* ref);
+	ExpVar(string name);
+	ExpVar(string name, T* ref);
 	virtual ~ExpVar();
 
 	virtual T& operator+=(const T& increment);
@@ -77,13 +81,13 @@ public:
 	virtual void Set(T* newval);
 	virtual void SetValue(T newval);
 	virtual T Get();
-	virtual QString Name();
-	virtual QString String();
+	virtual string Name();
+	virtual string String();
 
 protected:
-	QString name_;
+	string name_;
 	T* value_;
-	QScopedPointer<T> value_deleter_;
+	ScopedPtr<T> value_deleter_;
 };
 }
 
