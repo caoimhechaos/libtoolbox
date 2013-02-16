@@ -82,8 +82,8 @@ protected:
 #ifdef HAVE_SYS_INOTIFY_H
 QFileFileWatcher::QFileFileWatcher(QUrl url,
 		QUrlFileWatcherNotificationReceiver* cb)
-: inotify_handle_(inotify_init()), file_(url.path()),
-	file_info_(url.path()), cb_(cb)
+: file_(url.path()), file_info_(url.path()), cb_(cb),
+	inotify_handle_(inotify_init())
 {
 	file_handle_ = inotify_add_watch(inotify_handle_,
 			url.path().toStdString().data(),
