@@ -27,8 +27,8 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <QtCore/QString>
-#include <QtCore/QMap>
+#include <string>
+#include <map>
 #include <exception>
 #include "qsingleton.h"
 #include "expvar.h"
@@ -40,17 +40,17 @@ namespace _private
 {
 
 void
-ExpvarRegistry::Register(QString key, ExpVarBase* var)
+ExpvarRegistry::Register(string key, ExpVarBase* var)
 {
-	expvars_.insert(key, var);
+	expvars_.insert(pair<string, ExpVarBase*>(key, var));
 }
 
 ExpVarBase*
-ExpvarRegistry::Lookup(QString key)
+ExpvarRegistry::Lookup(string key)
 {
 	auto val = expvars_.find(key);
 	if (val != expvars_.end())
-		return *val;
+		return val->second;
 	else
 		return 0;
 }
@@ -61,7 +61,7 @@ ExpVarBase::~ExpVarBase()
 }
 
 template <typename T>
-ExpVar<T>::ExpVar(QString name, T* ref)
+ExpVar<T>::ExpVar(string name, T* ref)
 : name_(name), value_deleter_(new T)
 {
 	value_ = value_deleter_.data();
@@ -91,7 +91,7 @@ template <typename T> void
 ExpVar<T>::Set(T* newval)
 {
 	value_ = newval;
-	value_deleter_.reset(newval);
+	value_deleter_.Reset(newval);
 }
 
 template <typename T> void
@@ -100,29 +100,29 @@ ExpVar<T>::SetValue(T newval)
 	*value_ = newval;
 }
 
-template <typename T> QString
+template <typename T> string
 ExpVar<T>::Name()
 {
 	return name_;
 }
 
-template <typename T> QString
+template <typename T> string
 ExpVar<T>::String()
 {
-	return QString();
+	return string();
 }
 
 template <>
-ExpVar<int64_t>::ExpVar(QString name, int64_t* ref)
+ExpVar<int64_t>::ExpVar(string name, int64_t* ref)
 : name_(name), value_(ref), value_deleter_(ref)
 {
 }
 
 template <>
-ExpVar<int64_t>::ExpVar(QString name)
+ExpVar<int64_t>::ExpVar(string name)
 : name_(name), value_deleter_(new int64_t)
 {
-	value_ = value_deleter_.data();
+	value_ = value_deleter_.Get();
 	*value_ = 0;
 }
 
@@ -138,41 +138,39 @@ ExpVar<int64_t>::Get()
 	return *value_;
 }
 
-template <> QString
+template <> string
 ExpVar<int64_t>::String()
 {
-	QString ret;
-	ret.setNum(*value_, 10);
-	return ret;
+	return std::to_string(*value_);
 }
 
 template <>
-ExpVar<QString>::ExpVar(QString name, QString* ref)
+ExpVar<string>::ExpVar(string name, string* ref)
 : name_(name), value_(ref), value_deleter_(ref)
 {
 }
 
 template <>
-ExpVar<QString>::ExpVar(QString name)
-: name_(name), value_deleter_(new QString)
+ExpVar<string>::ExpVar(string name)
+: name_(name), value_deleter_(new string)
 {
-	value_ = value_deleter_.data();
+	value_ = value_deleter_.Get();
 }
 
 template <> void
-ExpVar<QString>::Add(const QString& increment)
+ExpVar<string>::Add(const string& increment)
 {
 	*value_ += increment;
 }
 
-template <> QString
-ExpVar<QString>::Get()
+template <> string
+ExpVar<string>::Get()
 {
 	return *value_;
 }
 
-template <> QString
-ExpVar<QString>::String()
+template <> string
+ExpVar<string>::String()
 {
 	return *value_;
 }
