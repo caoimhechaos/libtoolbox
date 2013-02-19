@@ -27,6 +27,9 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifndef INCLUDED_TOOLBOX_SCOPEDPTR_H
+#define INCLUDED_TOOLBOX_SCOPEDPTR_H 1
+
 namespace toolbox
 {
 // Scoped pointer implementation. Implements a pointer which points to a value
@@ -108,3 +111,5 @@ private:
 	T* pointee_;
 };
 }  // namespace toolbox
+
+#endif /* INCLUDED_TOOLBOX_SCOPEDPTR_H */
