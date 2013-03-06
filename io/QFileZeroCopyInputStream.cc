@@ -27,7 +27,13 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#ifdef HAVE_QTCORE_QFILE
 #include "QFileZeroCopyInputStream.h"
+#include <QtCore/QFile>
 #include <zlib.h>
 
 #define	QFILEINPUTSTREAM	65536
@@ -104,3 +110,5 @@ QFileZeroCopyInputStream::Checksum() const
 
 }  // namespace io
 }  // namespace toolbox
+
+#endif /* HAVE_QTCORE_QFILE */
