@@ -66,6 +66,7 @@ AC_CHECK_HEADERS([QtCore/QFile QtCore/QUrl sys/inotify.h])
 CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_DEFINE(_GLIBCXX_USE_C99, [1], [Use C99 for the glibc++ parts.])
 
 # Checks for library functions.
 
