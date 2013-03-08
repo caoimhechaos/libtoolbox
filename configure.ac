@@ -13,9 +13,14 @@ AC_ARG_WITH([qt-includes], [AC_HELP_STRING([--with-qt-includes=DIR],
 	    [Path to the QT headers])], [INCLUDES="$INCLUDES -I${withval}"])
 AC_ARG_WITH([qt-libs], [AC_HELP_STRING([--with-qt-libs=DIR],
 	    [Path to the QT libraries])],
-	    LDFLAGS="${LDFLAGS} -L${withval} -L${withval}"])
+	    [LDFLAGS="${LDFLAGS} -L${withval} -L${withval}"])
+AC_ARG_WITH([qt-moc], [AC_HELP_STRING([--with-qt-moc=PATH],
+	    [Path to the Qt Meta-Object Compiler])],
+	    [QT_MOC_PATH="${withval}"],
+	    [QT_MOC_PATH="moc"])
 AC_SUBST(INCLUDES)
 AC_SUBST(LDFLAGS)
+AC_SUBST(QT_MOC_PATH)
 
 # Checks for programs.
 AC_PROG_CXX
