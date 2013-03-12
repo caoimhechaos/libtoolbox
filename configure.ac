@@ -52,10 +52,15 @@ AC_CHECK_LIB([protobuf], [main],
 	     [PROTO_LIBS="$PROTO_LIBS -lprotobuf"])
 AC_CHECK_LIB([z], [crc32],
 	     [Z_LIBS="$Z_LIBS -lz"])
+AC_CHECK_LIB([crypto], [RIPEMD160_Init],
+	     [SSL_LIBS="$SSL_LIBS -lcrypto"])
+AC_CHECK_LIB([ssl], [BIO_new],
+	     [SSL_LIBS="$SSL_LIBS -lssl"])
 AC_LIBS="$AC_LIBS $QT_LIBS $Z_LIBS"
 AC_SUBST(GTEST_LIBS)
 AC_SUBST(QT_LIBS)
 AC_SUBST(Z_LIBS)
+AC_SUBST(SSL_LIBS)
 AC_SUBST(AC_LIBS)
 AC_SUBST(PROTO_LIBS)
 
@@ -70,5 +75,5 @@ AC_DEFINE(_GLIBCXX_USE_C99, [1], [Use C99 for the glibc++ parts.])
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile io/Makefile])
+AC_CONFIG_FILES([Makefile crypto/Makefile io/Makefile])
 AC_OUTPUT
