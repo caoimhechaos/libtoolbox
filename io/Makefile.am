@@ -17,4 +17,4 @@ CLEANFILES=		QUrlFileWatcher.moc
 QUrlFileWatcher.lo: QUrlFileWatcher.moc
 
 .cc.moc:
-	moc $< -o $@
+	${QT_MOC_PATH} $< -o $@

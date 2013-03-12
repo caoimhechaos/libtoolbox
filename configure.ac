@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([libtoolbox], [0.2], [caoimhechaos@protonmail.com])
+AC_INIT([libtoolbox], [0.2.2], [caoimhechaos@protonmail.com])
 AC_CONFIG_SRCDIR([expvar.cc])
 AC_CONFIG_HEADERS([config.h])
 
@@ -13,9 +13,14 @@ AC_ARG_WITH([qt-includes], [AC_HELP_STRING([--with-qt-includes=DIR],
 	    [Path to the QT headers])], [INCLUDES="$INCLUDES -I${withval}"])
 AC_ARG_WITH([qt-libs], [AC_HELP_STRING([--with-qt-libs=DIR],
 	    [Path to the QT libraries])],
-	    LDFLAGS="${LDFLAGS} -L${withval} -L${withval}"])
+	    [LDFLAGS="${LDFLAGS} -L${withval} -L${withval}"])
+AC_ARG_WITH([qt-moc], [AC_HELP_STRING([--with-qt-moc=PATH],
+	    [Path to the Qt Meta-Object Compiler])],
+	    [QT_MOC_PATH="${withval}"],
+	    [QT_MOC_PATH="moc"])
 AC_SUBST(INCLUDES)
 AC_SUBST(LDFLAGS)
+AC_SUBST(QT_MOC_PATH)
 
 # Checks for programs.
 AC_PROG_CXX
@@ -71,6 +76,7 @@ AC_CHECK_HEADERS([QtCore/QFile QtCore/QUrl sys/inotify.h])
 CPPFLAGS="$old_CPPFLAGS"
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_DEFINE(_GLIBCXX_USE_C99, [1], [Use C99 for the glibc++ parts.])
 
 # Checks for library functions.
 
