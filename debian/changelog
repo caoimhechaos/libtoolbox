@@ -1,3 +1,9 @@
+libtoolbox (0.2.2-1) unstable; urgency=low
+
+  * Add a Base64 encoder and decoder.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 12 Mar 2013 16:53:16 +0100
+
 libtoolbox (0.2.1-1) unstable; urgency=low
 
   * Add a ScopedPtr implementation and use that.
