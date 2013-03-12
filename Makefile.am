@@ -12,4 +12,4 @@ includetoolbox_HEADERS=	expvar.h qsingleton.h refcountedobject.h scopedptr.h
 
 ${TESTS}:	LDADD="${GTEST_LIBS} ${lib_LTLIBRARIES} ${QT_LIBS} ${Z_LIBS}"
 
-SUBDIRS=		io
+SUBDIRS=		crypto io
