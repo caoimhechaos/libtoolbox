@@ -60,15 +60,26 @@ ExpvarRegistry::Lookup(string key)
 }
 }  // namespace _private
 
+ExpVarBase::ExpVarBase(const string& name)
+: name_(name)
+{
+}
+
 ExpVarBase::~ExpVarBase()
 {
 }
 
-template <typename T>
-ExpVar<T>::ExpVar(string name, T* ref)
-: name_(name), value_deleter_(new T)
+string
+ExpVarBase::Name()
 {
-	value_ = value_deleter_.data();
+	return name_;
+}
+
+template <typename T>
+ExpVar<T>::ExpVar(const string& name, T* ref)
+: ExpVarBase(name), value_deleter_(new T)
+{
+	value_ = value_deleter_.Get();
 	QSingleton<_private::ExpvarRegistry>::GetInstance().Register(
 			name, this);
 }
@@ -99,15 +110,9 @@ ExpVar<T>::Set(T* newval)
 }
 
 template <typename T> void
-ExpVar<T>::SetValue(T newval)
+ExpVar<T>::SetValue(const T& newval)
 {
 	*value_ = newval;
-}
-
-template <typename T> string
-ExpVar<T>::Name()
-{
-	return name_;
 }
 
 template <typename T> string
@@ -117,14 +122,14 @@ ExpVar<T>::String()
 }
 
 template <>
-ExpVar<int64_t>::ExpVar(string name, int64_t* ref)
-: name_(name), value_(ref), value_deleter_(ref)
+ExpVar<int64_t>::ExpVar(const string& name, int64_t* ref)
+: ExpVarBase(name), value_(ref), value_deleter_(ref)
 {
 }
 
 template <>
-ExpVar<int64_t>::ExpVar(string name)
-: name_(name), value_deleter_(new int64_t)
+ExpVar<int64_t>::ExpVar(const string& name)
+: ExpVarBase(name), value_deleter_(new int64_t)
 {
 	value_ = value_deleter_.Get();
 	*value_ = 0;
@@ -149,14 +154,14 @@ ExpVar<int64_t>::String()
 }
 
 template <>
-ExpVar<string>::ExpVar(string name, string* ref)
-: name_(name), value_(ref), value_deleter_(ref)
+ExpVar<string>::ExpVar(const string& name, string* ref)
+: ExpVarBase(name), value_(ref), value_deleter_(ref)
 {
 }
 
 template <>
-ExpVar<string>::ExpVar(string name)
-: name_(name), value_deleter_(new string)
+ExpVar<string>::ExpVar(const string& name)
+: ExpVarBase(name), value_deleter_(new string)
 {
 	value_ = value_deleter_.Get();
 }
