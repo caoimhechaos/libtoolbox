@@ -62,33 +62,36 @@ private:
 class ExpVarBase
 {
 public:
-	virtual ~ExpVarBase() = 0;
-	virtual string Name() = 0;
+	ExpVarBase(const string& name);
+	virtual ~ExpVarBase();
+	virtual string Name();
 	virtual string String() = 0;
+
+private:
+	const string name_;
 };
 
 template <typename T>
 class ExpVar : public ExpVarBase
 {
 public:
-	ExpVar(string name);
-	ExpVar(string name, T* ref);
+	ExpVar(const string& name);
+	ExpVar(const string& name, T* ref);
 	virtual ~ExpVar();
 
 	virtual T& operator+=(const T& increment);
 
 	virtual void Add(const T& increment);
 	virtual void Set(T* newval);
-	virtual void SetValue(T newval);
+	virtual void SetValue(const T& newval);
 	virtual T Get();
-	virtual string Name();
 	virtual string String();
 
 protected:
-	string name_;
 	T* value_;
 	ScopedPtr<T> value_deleter_;
 };
+
 }
 
 #endif // TOOLBOX_EXPVAR_H
