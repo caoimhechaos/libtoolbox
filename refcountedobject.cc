@@ -27,6 +27,11 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif /* HAVE_CONFIG_H */
+
+#ifdef HAVE_QTCORE_QMUTEX
 #include "refcountedobject.h"
 
 namespace toolbox
@@ -44,6 +49,7 @@ RefCountedObject::Reference()
 	QMutexLocker lock(&reference_lock_);
 
 	num_references_++;
+	return true;
 }
 
 void
@@ -90,3 +96,5 @@ ObjectReference::IsValid()
 }
 
 }  // namespace toolbox
+
+#endif /* HAVE_QTCORE_QMUTEX */

@@ -31,6 +31,7 @@
 #include "config.h"
 #endif /* HAVE_CONFIG_H */
 
+#ifdef HAVE_QTCORE_QFILE
 #include <QtCore/QDateTime>
 #include <QtCore/QFileInfo>
 #include <QtCore/QThread>
@@ -163,3 +164,5 @@ QUrlFileWatcher::~QUrlFileWatcher()
 }  // namespace toolbox
 
 #include "QUrlFileWatcher.moc"
+
+#endif /* HAVE_QTCORE_QFILE */
