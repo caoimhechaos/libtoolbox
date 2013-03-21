@@ -32,7 +32,7 @@
 #endif
 
 #ifdef HAVE_QTCORE_QFILE
-#include "QFileZeroCopyInputStream.h"
+#include "toolbox/io/QFileZeroCopyInputStream.h"
 #include <QtCore/QFile>
 #include <zlib.h>
 

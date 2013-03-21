@@ -6,7 +6,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "qsingleton.h"
+#include "toolbox/qsingleton.h"
 
 namespace toolbox {
 namespace testing {

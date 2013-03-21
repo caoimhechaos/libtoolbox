@@ -46,8 +46,8 @@
 #include <memory.h>
 #endif /* HAVE_MEMORY_H */
 
-#include "base64.h"
-#include "scopedptr.h"
+#include "toolbox/crypto/base64.h"
+#include "toolbox/scopedptr.h"
 
 namespace toolbox
 {

@@ -6,7 +6,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "expvar.h"
+#include "toolbox/expvar.h"
 
 namespace toolbox {
 namespace testing {

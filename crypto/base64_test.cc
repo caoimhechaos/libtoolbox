@@ -6,7 +6,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "base64.h"
+#include "toolbox/crypto/base64.h"
 
 namespace toolbox {
 namespace testing {

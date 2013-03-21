@@ -75,5 +75,6 @@ AC_DEFINE(_GLIBCXX_USE_C99, [1], [Use C99 for the glibc++ parts.])
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile crypto/Makefile io/Makefile])
+AC_CONFIG_FILES([Makefile crypto/Makefile io/Makefile toolbox/Makefile
+		 toolbox/io/Makefile toolbox/crypto/Makefile])
 AC_OUTPUT
