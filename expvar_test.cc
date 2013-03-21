@@ -37,6 +37,21 @@ TEST_F(ExpVarTest, IntegerVariables)
 	EXPECT_EQ("23", exported.String());
 }
 
+TEST_F(ExpVarTest, IntegerMaps)
+{
+	ExpMap<int64_t> exported(string("test-variable"));
+	EXPECT_EQ(0, exported.Get("foo"));
+	exported.Add("foo", 1);
+	EXPECT_EQ(1, exported.Get("foo"));
+	exported.SetValue("foo", 0);
+	EXPECT_EQ(0, exported.Get("foo"));
+	exported.Add("bar", 2);
+
+	exported.Add("baz", 23);
+	EXPECT_EQ("test-variable", exported.Name());
+	EXPECT_EQ("{\"bar\": 2, \"baz\": 23, \"foo\": 0}", exported.String());
+}
+
 TEST_F(ExpVarTest, StringVariables)
 {
 	ExpVar<string> exported("test-variable",
