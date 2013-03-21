@@ -32,7 +32,7 @@
 #endif /* HAVE_CONFIG_H */
 
 #ifdef HAVE_QTCORE_QMUTEX
-#include "refcountedobject.h"
+#include "toolbox/refcountedobject.h"
 
 namespace toolbox
 {

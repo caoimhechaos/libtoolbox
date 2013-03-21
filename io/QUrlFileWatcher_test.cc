@@ -12,7 +12,7 @@
 #include <gtest/gtest.h>
 #include <string>
 
-#include "QUrlFileWatcher.h"
+#include "toolbox/io/QUrlFileWatcher.h"
 
 namespace toolbox {
 namespace io {

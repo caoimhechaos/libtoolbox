@@ -51,7 +51,7 @@
 #define EVENT_BUF_LEN EVENT_SIZE + NAME_MAX + 1
 #endif /* EVENT_BUF_LEN */
 
-#include "QUrlFileWatcher.h"
+#include "toolbox/io/QUrlFileWatcher.h"
 
 namespace toolbox
 {

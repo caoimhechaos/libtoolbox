@@ -28,7 +28,7 @@
  */
 
 #include <gtest/gtest.h>
-#include "scopedptr.h"
+#include "toolbox/scopedptr.h"
 
 namespace toolbox {
 namespace testing {

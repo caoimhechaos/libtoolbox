@@ -34,8 +34,8 @@
 #include <string>
 #include <map>
 #include <exception>
-#include "qsingleton.h"
-#include "expvar.h"
+#include "toolbox/qsingleton.h"
+#include "toolbox/expvar.h"
 
 namespace toolbox
 {

@@ -8,6 +8,3 @@ libtoolbox_crypto_la_LIBADD=	${SSL_LIBS} -lglog
 
 base64_test_SOURCES=	base64_test.cc
 base64_test_LDADD=	${GTEST_LIBS} ${lib_LTLIBRARIES} ${SSL_LIBS}
-
-includetoolboxdir=	${includedir}/toolbox/crypto
-includetoolbox_HEADERS=	base64.h

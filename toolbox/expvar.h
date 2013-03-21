@@ -34,7 +34,7 @@
 
 #include <string>
 #include <map>
-#include "scopedptr.h"
+#include <toolbox/scopedptr.h>
 
 #include <exception>
 

@@ -9,9 +9,6 @@ libtoolbox_io_la_LIBADD=	${QT_LIBS} ${PROTO_LIBS} ${Z_LIBS} -lglog
 QUrlFileWatcher_test_SOURCES=	QUrlFileWatcher_test.cc
 QUrlFileWatcher_test_LDADD=	${GTEST_LIBS} ${lib_LTLIBRARIES} ${QT_LIBS} -lglog
 
-includetoolboxdir=	${includedir}/toolbox/io
-includetoolbox_HEADERS=	QFileZeroCopyInputStream.h QUrlFileWatcher.h
-
 CLEANFILES=		QUrlFileWatcher.moc
 
 QUrlFileWatcher.lo: QUrlFileWatcher.moc
