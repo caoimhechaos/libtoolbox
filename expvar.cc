@@ -32,6 +32,7 @@
 #endif /* HAVE_CONFIG_H */
 
 #include <string>
+#include <list>
 #include <map>
 #include <exception>
 #include "toolbox/qsingleton.h"
@@ -57,6 +58,15 @@ ExpvarRegistry::Lookup(string key)
 		return val->second;
 	else
 		return 0;
+}
+
+list<string>
+ExpvarRegistry::Keys()
+{
+	list<string> ret;
+	for (pair<string, ExpVarBase*> p : expvars_)
+		ret.push_back(p.first);
+	return ret;
 }
 }  // namespace _private
 
