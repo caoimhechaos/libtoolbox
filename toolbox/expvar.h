@@ -33,6 +33,7 @@
 #define TOOLBOX_EXPVAR_H 1
 
 #include <string>
+#include <list>
 #include <map>
 #include <toolbox/scopedptr.h>
 #include <toolbox/qsingleton.h>
@@ -41,6 +42,7 @@
 
 namespace toolbox
 {
+using std::list;
 using std::map;
 using std::pair;
 using std::string;
@@ -54,6 +56,7 @@ class ExpvarRegistry
 public:
 	void Register(string key, ExpVarBase* var);
 	ExpVarBase* Lookup(string key);
+	list<string> Keys();
 
 private:
 	map<string, ExpVarBase*> expvars_;

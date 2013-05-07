@@ -65,5 +65,22 @@ TEST_F(ExpVarTest, StringVariables)
 	EXPECT_EQ("test-string test-value", exported.String());
 }
 
+TEST_F(ExpVarTest, ExpVarList)
+{
+	ExpVar<int64_t> v1("variable-one");
+	ExpVar<int64_t> v2("variable-two");
+	ExpVar<string> v3("variable-three", new string("bla"));
+	list<string> values;
+	values.push_back("test-variable");  // from above :S
+	values.push_back("variable-one");
+	values.push_back("variable-three");
+	values.push_back("variable-two");
+
+	toolbox::_private::ExpvarRegistry reg =
+		QSingleton<toolbox::_private::ExpvarRegistry>::GetInstance();
+
+	EXPECT_EQ(values, reg.Keys());
+}
+
 } /* namespace testing */
 } /* namespace toolbox */
