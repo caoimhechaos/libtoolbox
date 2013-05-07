@@ -1,3 +1,9 @@
+libtoolbox (0.3.1-1) unstable; urgency=low
+
+  * Added some fixes for exported variables.
+
+ -- Caoimhe Chaos <caoimhechaos@protonmail.com>  Tue, 07 May 2013 18:46:20 +0200
+
 libtoolbox (0.3-1) unstable; urgency=low
 
   * Upgraded to the 0.3 version of libtoolbox.
