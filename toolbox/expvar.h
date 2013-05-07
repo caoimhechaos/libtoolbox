@@ -176,7 +176,7 @@ private:
 	map<string, T*> values_;
 };
 
-template <>
+template <> inline
 ExpVar<int64_t>::ExpVar(const string& name, int64_t* ref)
 : ExpVarBase(name), value_deleter_(ref ? ref : new int64_t)
 {
@@ -186,19 +186,19 @@ ExpVar<int64_t>::ExpVar(const string& name, int64_t* ref)
 				name, this);
 }
 
-template <> void
+template <> inline void
 ExpVar<int64_t>::Add(const int64_t& increment)
 {
 	*value_ += increment;
 }
 
-template <> string
+template <> inline string
 ExpVar<int64_t>::String()
 {
 	return std::to_string(*value_);
 }
 
-template <> void
+template <> inline void
 ExpMap<int64_t>::Add(const string& mapkey, const int64_t& increment)
 {
 	if (values_[mapkey])
@@ -207,7 +207,7 @@ ExpMap<int64_t>::Add(const string& mapkey, const int64_t& increment)
 		values_[mapkey] = new int64_t(increment);
 }
 
-template <> string
+template <> inline string
 ExpMap<int64_t>::String()
 {
 	string ret;
@@ -222,13 +222,13 @@ ExpMap<int64_t>::String()
 	return ret;
 }
 
-template <> void
+template <> inline void
 ExpVar<string>::Add(const string& increment)
 {
 	*value_ += increment;
 }
 
-template <> string
+template <> inline string
 ExpVar<string>::String()
 {
 	return *value_;
